@@ -27,7 +27,9 @@ class ApplicationController < Sinatra::Base
   get '/sessions/login' do
 
     # the line of code below render the view page in app/views/sessions/login.erb
-    
+    @user = User.find_by(email: params["email"], password: params["password"])
+    session[:user_id] = @user.id
+
     erb :'sessions/login'
   end
 
